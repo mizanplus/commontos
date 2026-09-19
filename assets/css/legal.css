@@ -218,6 +218,34 @@ img { max-width: 100%; display: block; }
   text-decoration: none;
 }
 
+/* Platform badges */
+.platform-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+
+.platform-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid;
+}
+
+/* Per-platform doc group inside a card */
+.platform-links { display: flex; flex-direction: column; gap: 10px; }
+
+.platform-doc-group {
+  padding: 10px 12px;
+  background: var(--clr-surface-2);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+}
+
+.platform-doc-group .platform-badge { margin-bottom: 8px; }
+.platform-doc-group .doc-links { gap: 6px; }
+
 /* ============================================================
    APP INDEX PAGE
    ============================================================ */

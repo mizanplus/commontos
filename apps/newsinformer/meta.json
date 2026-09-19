@@ -1,0 +1,16 @@
+{
+  "name": "NewsInformer",
+  "slug": "newsinformer",
+  "description": "A Facebook app for informing users with curated news.",
+  "icon": "📣",
+  "contactEmail": "legal@yourdomain.com",
+  "website": "https://yourdomain.com",
+  "platforms": [
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "icon": "📘",
+      "docsLastUpdated": "2025-01-01"
+    }
+  ]
+}

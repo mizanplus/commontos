@@ -1,0 +1,16 @@
+{
+  "name": "Newsgator",
+  "slug": "newsgator",
+  "description": "A Facebook app for aggregating and sharing news.",
+  "icon": "📰",
+  "contactEmail": "legal@yourdomain.com",
+  "website": "https://yourdomain.com",
+  "platforms": [
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "icon": "📘",
+      "docsLastUpdated": "2025-01-01"
+    }
+  ]
+}

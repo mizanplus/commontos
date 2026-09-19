@@ -1,93 +1,161 @@
-# commontos — Legal Docs Hub
+# commontos — Legal Docs Framework
 
-A single repository for **Terms of Service**, **Privacy Policies**, and other legal documents across all applications, published as a clean static site via **GitHub Pages**.
+A data-driven monorepo for **Terms of Service**, **Privacy Policies**, and other legal documents across multiple applications and platforms, published via **GitHub Pages**.
 
 **Live site:** [mizanplus.github.io/commontos](https://mizanplus.github.io/commontos/)
 
 ---
 
-## 📂 Repository Structure
+## ⚡ How It Works
+
+Every HTML page is an **identical template** that loads `meta.json` at runtime and fills in the app name, platform, dates, and contact info.
+
+**To rename an app:** change one value in `meta.json`. No HTML changes needed.
+
+```
+meta.json  →  All pages for that app reflect the new name instantly.
+```
+
+---
+
+## 📂 Structure
 
 ```
 commontos/
-├── index.html                        # Hub — lists all apps & their documents
-├── _config.yml                       # GitHub Pages configuration
+├── index.html                         # Hub — built dynamically from registry.json
 ├── assets/
-│   └── css/legal.css                 # Shared stylesheet for all pages
-├── apps/
-│   ├── _template/                    # ← Copy this to add a new app
-│   │   ├── index.html
-│   │   ├── terms-of-service.html
-│   │   ├── privacy-policy.html
-│   │   └── meta.json
-│   ├── discord-bot/                  # Discord Bot documents
-│   └── facebook-app/                 # Facebook App documents
-└── .github/
-    └── workflows/pages.yml           # Auto-deploy to GitHub Pages
+│   ├── css/legal.css                  # Shared stylesheet
+│   └── js/
+│       ├── hub.js                     # Hub: loads registry → renders cards
+│       └── doc-loader.js              # Docs: loads meta.json → populates page
+│
+└── apps/
+    ├── registry.json                  # ← Add your app slug here to register it
+    │
+    ├── _template/                     # ← Copy this folder to add a new app
+    │   ├── meta.json                  # ← THE ONLY FILE YOU EDIT PER APP
+    │   ├── index.html                 # App landing (identical for all apps)
+    │   ├── discord/                   # Platform sub-folder (copy as needed)
+    │   │   ├── terms-of-service.html  # Identical for all Discord apps
+    │   │   └── privacy-policy.html
+    │   └── facebook/
+    │       ├── terms-of-service.html  # Identical for all Facebook apps
+    │       └── privacy-policy.html
+    │
+    ├── agentsur/   meta.json + index.html + discord/
+    ├── aiagent/    meta.json + index.html + discord/
+    ├── aimi/       meta.json + index.html + discord/
+    ├── newsgator/  meta.json + index.html + facebook/
+    └── newsinformer/ meta.json + index.html + facebook/
 ```
 
 ---
 
-## ➕ Adding a New Application
+## ➕ Adding a New App
 
 **Step 1 — Copy the template:**
+```powershell
+Copy-Item apps/_template apps/your-app-slug -Recurse
 ```
-apps/_template/  →  apps/your-app-name/
+Delete platform sub-folders you don't need (e.g. remove `facebook/` for a Discord-only bot).
+
+**Step 2 — Fill in `meta.json` (the ONLY file to edit):**
+```json
+{
+  "name": "YourAppName",
+  "slug": "your-app-slug",
+  "description": "What this app does.",
+  "icon": "🤖",
+  "contactEmail": "legal@yourdomain.com",
+  "website": "https://yourdomain.com",
+  "platforms": [
+    {
+      "id": "discord",
+      "label": "Discord",
+      "icon": "🤖",
+      "inviteUrl": "https://discord.com/oauth2/authorize?client_id=...",
+      "docsLastUpdated": "2025-01-01"
+    }
+  ]
+}
 ```
 
-**Step 2 — Edit `meta.json`:**
-Update `name`, `description`, `icon`, `platform`, `contactEmail`, `website`, and the `lastUpdated` dates.
-
-**Step 3 — Fill in the document HTML:**
-Replace all placeholder text in `terms-of-service.html` and `privacy-policy.html`.
-Search for `Application Name`, `YYYY-MM-DD`, `example.com`, and `legal@example.com`.
-
-**Step 4 — Add a card to the hub:**
-Open `index.html` and copy an existing `.app-card` block. Update the name, icon, description, and `href` links to point to your new folder.
-
-**Step 5 — Commit and push to `main`:**
-GitHub Actions will deploy automatically. Your docs are live within ~1 minute at:
+**Step 3 — Register in `apps/registry.json`:**
+```json
+["agentsur", "aiagent", "aimi", "newsgator", "newsinformer", "your-app-slug"]
 ```
-https://mizanplus.github.io/commontos/apps/your-app-name/terms-of-service.html
-```
+
+**Step 4 — Push to main.** GitHub Actions deploys in ~1 minute.
+
+**Total files edited: 2** (`meta.json` + `registry.json`)
 
 ---
 
-## 🌐 Enabling GitHub Pages
+## 🔀 Adding a Platform to an Existing App
 
-1. Go to your repository **Settings → Pages**
-2. Under **Source**, select **GitHub Actions**
-3. Push any commit to `main` — the workflow handles the rest
+```powershell
+# Example: add Telegram to AgentSur
+Copy-Item apps/_template/discord apps/agentsur/telegram -Recurse
+```
+Then edit `apps/agentsur/meta.json` — add an entry to the `platforms` array:
+```json
+{ "id": "telegram", "label": "Telegram", "icon": "✈️", "docsLastUpdated": "2025-01-01" }
+```
+
+The sidebar on all existing AgentSur doc pages will automatically show a link to the new Telegram docs.
+
+---
+
+## ✏️ Renaming an App
+
+```diff
+// apps/agentsur/meta.json
+- "name": "AgentSur",
++ "name": "AgentSurAI",
+```
+
+Push. Done. Every page, the hub, and the app index all reflect the new name.
 
 ---
 
 ## 📄 Published Documents
 
-| Application | Terms of Service | Privacy Policy |
-|-------------|-----------------|----------------|
-| [Discord Bot](https://mizanplus.github.io/commontos/apps/discord-bot/) | [ToS](https://mizanplus.github.io/commontos/apps/discord-bot/terms-of-service.html) | [PP](https://mizanplus.github.io/commontos/apps/discord-bot/privacy-policy.html) |
-| [Facebook App](https://mizanplus.github.io/commontos/apps/facebook-app/) | [ToS](https://mizanplus.github.io/commontos/apps/facebook-app/terms-of-service.html) | [PP](https://mizanplus.github.io/commontos/apps/facebook-app/privacy-policy.html) |
+| App | Platform | Terms of Service | Privacy Policy |
+|-----|----------|-----------------|----------------|
+| AgentSur | Discord | [ToS](https://mizanplus.github.io/commontos/apps/agentsur/discord/terms-of-service.html) | [PP](https://mizanplus.github.io/commontos/apps/agentsur/discord/privacy-policy.html) |
+| AIAgent | Discord | [ToS](https://mizanplus.github.io/commontos/apps/aiagent/discord/terms-of-service.html) | [PP](https://mizanplus.github.io/commontos/apps/aiagent/discord/privacy-policy.html) |
+| AIMi | Discord | [ToS](https://mizanplus.github.io/commontos/apps/aimi/discord/terms-of-service.html) | [PP](https://mizanplus.github.io/commontos/apps/aimi/discord/privacy-policy.html) |
+| Newsgator | Facebook | [ToS](https://mizanplus.github.io/commontos/apps/newsgator/facebook/terms-of-service.html) | [PP](https://mizanplus.github.io/commontos/apps/newsgator/facebook/privacy-policy.html) |
+| NewsInformer | Facebook | [ToS](https://mizanplus.github.io/commontos/apps/newsinformer/facebook/terms-of-service.html) | [PP](https://mizanplus.github.io/commontos/apps/newsinformer/facebook/privacy-policy.html) |
 
 ---
 
-## 🔧 Customization
+## 🌐 Enabling GitHub Pages
 
-**Update contact info:**  
-Replace `legal@example.com` and `https://example.com` in each app's HTML files.
+1. Go to repo **Settings → Pages**
+2. Under **Source**, select **GitHub Actions**
+3. Push any commit to `main` — the workflow handles the rest
 
-**Update effective dates:**  
-Edit the `lastUpdated` fields in each app's `meta.json` and the "Last updated" text in the HTML sidebar footer and `doc-meta` section.
+---
 
-**Add new document types** (e.g., Cookie Policy):  
-1. Create a new HTML file in the app's folder (copy `privacy-policy.html` as a starting point).
-2. Add a `<a class="doc-card">` entry in that app's `index.html`.
-3. Add a sidebar nav link in the new document referencing the other docs.
+## Supported Platforms (folder names)
+
+| Platform | Folder | Template available |
+|----------|--------|-------------------|
+| Discord | `discord/` | ✅ |
+| Facebook / Meta | `facebook/` | ✅ |
+| Telegram | `telegram/` | Copy & adapt from `discord/` |
+| Slack | `slack/` | Copy & adapt |
+| Google / YouTube | `google/` | Copy & adapt |
+| Twitter / X | `twitter/` | Copy & adapt |
+| Web / SaaS | `web/` | Copy & adapt |
+| Mobile App | `mobile/` | Copy & adapt |
 
 ---
 
 ## ⚖️ Legal Disclaimer
 
-The documents in this repository are provided as templates and starting points. They are **not legal advice**. You should consult a qualified attorney to ensure your legal documents are appropriate for your specific application, jurisdiction, and use case.
+Documents in this repository are provided as a framework and starting point. They are **not legal advice**. Consult a qualified attorney to ensure your documents are appropriate for your specific application, jurisdiction, and use case.
 
 ---
 

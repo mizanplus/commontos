@@ -1,8 +1,8 @@
 {
-  "name": "Application Name",
-  "slug": "app-slug",
-  "description": "Short description of what this application does.",
-  "icon": "📄",
+  "name": "AIAgent",
+  "slug": "aiagent",
+  "description": "An intelligent Discord agent bot.",
+  "icon": "🧠",
   "contactEmail": "legal@yourdomain.com",
   "website": "https://yourdomain.com",
   "platforms": [
