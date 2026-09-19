@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legal Docs Hub — mizanplus</title>
+  <meta name="description" content="Terms of Service, Privacy Policy, and legal documents for all applications by mizanplus." />
+  <link rel="stylesheet" href="assets/css/legal.css" />
+  <style>
+    /* Hub-only extras */
+    .hub-search {
+      max-width: 420px;
+      margin: 24px auto 0;
+      position: relative;
+    }
+    .hub-search input {
+      width: 100%;
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius);
+      padding: 10px 16px 10px 40px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--clr-text);
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .hub-search input:focus { border-color: var(--clr-accent); }
+    .hub-search input::placeholder { color: var(--clr-text-dim); }
+    .hub-search .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--clr-text-dim);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin: 32px 0 0;
+    }
+    .stat { text-align: center; }
+    .stat-number {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--clr-text);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--clr-text-muted);
+    }
+    .how-to {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-top: 48px;
+    }
+    .how-to h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .step { display: flex; gap: 12px; align-items: flex-start; }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--clr-accent-glow);
+      border: 1px solid rgba(59,130,246,0.3);
+      color: var(--clr-accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-body h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
+    .step-body p  { font-size: 0.8rem; color: var(--clr-text-muted); line-height: 1.5; }
+  </style>
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header class="hub-header">
+    <div class="badge">⚖️ Legal Docs Hub</div>
+    <h1>Legal Documentation</h1>
+    <p>Terms of Service, Privacy Policies, and other legal documents for all applications.</p>
+    <div class="hub-search">
+      <span class="search-icon">🔍</span>
+      <input id="search-input" type="search" placeholder="Search apps…" aria-label="Search applications" />
+    </div>
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-number" id="app-count">2</span>
+        <span class="stat-label">Applications</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number" id="doc-count">4</span>
+        <span class="stat-label">Documents</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Main ── -->
+  <main class="hub-main">
+
+    <p class="section-title">All Applications</p>
+
+    <div class="app-grid" id="app-grid">
+
+      <!-- Discord Bot -->
+      <div class="app-card" data-name="Discord Bot">
+        <div class="app-card-icon">🤖</div>
+        <h2>Discord Bot</h2>
+        <p>Legal documents for the Discord Bot, covering user data handling and bot usage terms.</p>
+        <div class="doc-links">
+          <a class="doc-link" href="apps/discord-bot/index.html">📋 Overview</a>
+          <a class="doc-link" href="apps/discord-bot/terms-of-service.html">📜 Terms of Service</a>
+          <a class="doc-link" href="apps/discord-bot/privacy-policy.html">🔒 Privacy Policy</a>
+        </div>
+      </div>
+
+      <!-- Facebook App -->
+      <div class="app-card" data-name="Facebook App">
+        <div class="app-card-icon">📘</div>
+        <h2>Facebook App</h2>
+        <p>Legal documents for the Facebook App, including Meta platform compliance requirements.</p>
+        <div class="doc-links">
+          <a class="doc-link" href="apps/facebook-app/index.html">📋 Overview</a>
+          <a class="doc-link" href="apps/facebook-app/terms-of-service.html">📜 Terms of Service</a>
+          <a class="doc-link" href="apps/facebook-app/privacy-policy.html">🔒 Privacy Policy</a>
+        </div>
+      </div>
+
+      <!-- Add more app cards above this comment -->
+
+    </div>
+
+    <!-- How to add a new app -->
+    <div class="how-to">
+      <h2>➕ Adding a New Application</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Copy the template</h4>
+            <p>Duplicate <code>apps/_template/</code> to a new folder, e.g. <code>apps/telegram-bot/</code>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Edit meta.json</h4>
+            <p>Update the app name, description, icon, and relevant links in <code>meta.json</code>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Fill in the docs</h4>
+            <p>Replace placeholder text in <code>terms-of-service.html</code> and <code>privacy-policy.html</code>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>Add a card here</h4>
+            <p>Copy an <code>.app-card</code> block in <code>index.html</code> and point it to the new folder.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <h4>Push to main</h4>
+            <p>GitHub Actions will deploy automatically. The new URL is live in ~1 minute.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> mizanplus · <a href="https://github.com/mizanplus/commontos">GitHub</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Live search filter
+    const searchInput = document.getElementById('search-input');
+    const cards = document.querySelectorAll('.app-card');
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.toLowerCase().trim();
+      let visible = 0;
+      cards.forEach(card => {
+        const name = card.dataset.name.toLowerCase();
+        const matches = !q || name.includes(q);
+        card.style.display = matches ? '' : 'none';
+        if (matches) visible++;
+      });
+      document.getElementById('app-count').textContent = visible;
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "Facebook App",
+  "slug": "facebook-app",
+  "description": "A Facebook application integrating with the Meta platform for social features.",
+  "icon": "📘",
+  "platform": "Meta / Facebook",
+  "contactEmail": "legal@example.com",
+  "website": "https://example.com",
+  "docs": [
+    {
+      "type": "terms-of-service",
+      "label": "Terms of Service",
+      "file": "terms-of-service.html",
+      "lastUpdated": "2025-01-01"
+    },
+    {
+      "type": "privacy-policy",
+      "label": "Privacy Policy",
+      "file": "privacy-policy.html",
+      "lastUpdated": "2025-01-01"
+    }
+  ]
+}

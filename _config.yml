@@ -1,0 +1,11 @@
+title: Legal Docs Hub
+description: Terms of Service, Privacy Policy, and legal documents for all applications.
+baseurl: "/commontos"
+url: "https://mizanplus.github.io"
+
+# Exclude template folder from Jekyll processing
+exclude:
+  - apps/_template/
+
+# Prevent Jekyll from overriding HTML files
+plugins: []

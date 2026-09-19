@@ -1,0 +1,23 @@
+{
+  "name": "Application Name",
+  "slug": "app-slug",
+  "description": "Short description of what this application does.",
+  "icon": "🔧",
+  "platform": "Platform Name",
+  "contactEmail": "legal@example.com",
+  "website": "https://example.com",
+  "docs": [
+    {
+      "type": "terms-of-service",
+      "label": "Terms of Service",
+      "file": "terms-of-service.html",
+      "lastUpdated": "YYYY-MM-DD"
+    },
+    {
+      "type": "privacy-policy",
+      "label": "Privacy Policy",
+      "file": "privacy-policy.html",
+      "lastUpdated": "YYYY-MM-DD"
+    }
+  ]
+}
